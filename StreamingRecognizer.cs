@@ -1,7 +1,6 @@
 
 //this script has been directly taken from oshohams unity google cloud speech to text tutorial and unity package: https://unitylist.com/p/otv/Unity-Google-Cloud-Streaming-Speech-To-Text
-// I will be editing it in the future to be combined with my send prompt script
-
+// I have edited this script to suit my project but still took mainly instruction from the aforementioned unity tutorial
 
 using System;
 using System.Collections;
