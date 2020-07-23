@@ -3,23 +3,44 @@ using System.Collections;
 using UnityEngine.UI;
 
 
+
 public class webcam : MonoBehaviour
 {
     int currentCamIndex = 2;
 
     WebCamTexture tex;
+    //WebCamTexture tex2;
     WebCamDevice[] devices;
+    int deviceIndex;
 
-    public RawImage display;
+    //public RawImage webcam2;
+
+
+    public RawImage webcam1;
     // Start is called before the first frame update
     void Start()
     {
         devices = WebCamTexture.devices;
         tex = new WebCamTexture();
         tex.deviceName = devices[0].name;
-        display.texture = tex;
+        webcam1.texture = tex;
         tex.Play();
+
+        {
+
+
+            AudioSource audioSource = this.gameObject.GetComponent<AudioSource>();
+            audioSource.clip = Microphone.Start(Microphone.devices[deviceIndex], true, 10, 44100);
+            audioSource.Play();
+        }
     }
+
+    void Update()
+    {
+        // for()
+
+    }
+
 
     void OnGUI()
 
@@ -35,10 +56,8 @@ public class webcam : MonoBehaviour
 
 
     }
+}
+
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
-}
+  

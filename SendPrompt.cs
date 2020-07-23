@@ -6,12 +6,32 @@ public class SendPrompt : MonoBehaviour
 {
     public OSC osc;
 
-
+    public ReceiveOSC receiver;
     public string[] messages;
+
+    //m_MyEvent.AddListener(onFinalResult);
 
     private void Start()
     {
         
+    }
+
+    public void Send(string transcript)
+    {
+        OscMessage message;
+
+
+
+        message = new OscMessage();
+        message.address = "/query";
+        message.values.Add("{\"prompt\":\"" + transcript + "\"}");
+        osc.Send(message);
+        receiver.transcript = transcript;
+
+        Debug.Log("sent");
+
+
+
     }
 
 
@@ -33,16 +53,7 @@ public class SendPrompt : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-            OscMessage message;
-
-
-
-            message = new OscMessage();
-            message.address = "/query";
-            message.values.Add("{\"prompt\":\"" +  messages[Random.Range(0,4)] + "\"}");
-            osc.Send(message);
-
-            Debug.Log("sent");
+          
 
         }
 

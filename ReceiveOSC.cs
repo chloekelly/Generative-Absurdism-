@@ -6,6 +6,8 @@ public class ReceiveOSC : MonoBehaviour
 {
 
     public OSC osc;
+    public TextToSpeech tts;
+    public string transcript;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +25,23 @@ public class ReceiveOSC : MonoBehaviour
     void OnData(OscMessage message)
     {
         string words = message.ToString();
-        words = words.Substring(words.IndexOf("\\n"));
+        words = words.Substring(words.IndexOf(transcript) + transcript.Length);
         words = words.Replace("\\n", "");
         words = words.Replace("\"", "");
         words = words.Replace("}", "");
         words = words.Replace("{", "");
+        words = words.Replace(".", " ");
+        words = words.Replace("ESTRAGON", "    ");
+        words = words.Replace("VLADIMIR", "    ");
+        words = words.Replace("GUIL", "     ");
+        words = words.Replace("ROS", "     ");
+        words = words.Replace("Pause", " ");
+        words = words.Replace("Mr Paradock", "     ");
+        words = words.Replace("Mrs Paradock", " ");
 
+
+        tts.dialogue = words;
+        tts.Speak();
         Debug.Log(words);
     }
 

@@ -2,6 +2,7 @@
 
 public class sounds : MonoBehaviour
 {
+    public int mic;
     public float RmsValue;
     public float DbValue;
     public float PitchValue;
@@ -9,6 +10,7 @@ public class sounds : MonoBehaviour
     private const int QSamples = 1024;
     private const float RefValue = 0.1f;
     private const float Threshold = 0.02f;
+    private int numMics;
 
     float[] _samples;
     private float[] _spectrum;
@@ -16,10 +18,17 @@ public class sounds : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Microphone number " + mic + " is " + Microphone.devices[mic]);
+        numMics = Microphone.devices.Length;
+
+
+
         var myAudioSource = GetComponent<AudioSource>();
-        myAudioSource.clip = Microphone.Start(Microphone.devices[0], true, 1, 44100);
-        myAudioSource.loop = true;
-        myAudioSource.Play();
+            myAudioSource.clip = Microphone.Start(Microphone.devices[mic], true, 1, 44100);
+            myAudioSource.loop = true;
+            myAudioSource.Play();
+
+        
 
         _samples = new float[QSamples];
         _spectrum = new float[QSamples];
