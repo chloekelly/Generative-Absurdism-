@@ -5,6 +5,8 @@ using System.Xml;
 using System.IO;
 using UnityEngine.UI;
 
+// I took and edited this script from Final Marco for the text to speech function in  my project
+
 /**************************************************************************************
  * ******************Text to Speech for Windows SAPI *********************************
  * ************************************************************************************
