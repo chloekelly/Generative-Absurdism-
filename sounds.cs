@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// I followed this unity forum post to create this code: https://forum.unity.com/threads/how-to-calculate-db-correct.546128/ I also edited it to use for my project
+
 public class sounds : MonoBehaviour
 {
     public int mic;
