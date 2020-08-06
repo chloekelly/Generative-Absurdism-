@@ -27,27 +27,32 @@ public class transformimage : MonoBehaviour
     {
         if (loud1.DbValue < -40)
         {
-            x+= 0.01f;
+            scaleChange = new Vector3(10, 10, 10);
+            cam.transform.localScale += scaleChange/1000;
 
         }
        
         if(loud1.DbValue > -40)
         {
-
-            x -= 0.01f;
+            scaleChange = new Vector3(-10, -10, -10);
+            cam.transform.localScale += scaleChange/1000;
         }
         
         
         if (loud2.DbValue < -40)
         {
-            x += 0.01f;
+
+            scaleChange = new Vector3(10, 10, 10);
+            cam.transform.localScale += scaleChange/1000;
+
 
         }
 
         if (loud2.DbValue > -40)
         {
 
-            x -= 0.01f;
+            scaleChange = new Vector3(-10, -10,-10);
+            cam.transform.localScale += scaleChange/1000;
         }
 
         //  if (loud3.DbValue < 80)
@@ -68,9 +73,9 @@ public class transformimage : MonoBehaviour
         //  {
         //  x-=0;
         //   }
-       x = Mathf.Clamp(x, min, max);
-        scaleChange = new Vector3(x, x, x);
-        cam.transform.localScale += scaleChange/100;
+     //  x = Mathf.Clamp(x, min, max);
+       // scaleChange = new Vector3(x, x, x);
+        //cam.transform.localScale += scaleChange/100;
         
     }
 }
