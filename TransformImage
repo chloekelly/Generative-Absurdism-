@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class transformimage : MonoBehaviour
 {
-    public float x;
+    public float x = 50;
     private GameObject webcam;
     private Vector3 scaleChange;
     public sounds loud1;
+    public sounds loud2;
+    public sounds loud3;
+    public sounds loud4;
     public Transform cam;
+    private float min = 1;
+    private float max = 150;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +25,52 @@ public class transformimage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        x = loud1.DbValue;
-        scaleChange = new Vector3(x, x, x);
-        cam.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);//scaleChange;
+        if (loud1.DbValue < -40)
+        {
+            x+= 0.01f;
 
+        }
+       
+        if(loud1.DbValue > -40)
+        {
+
+            x -= 0.01f;
+        }
+        
+        
+        if (loud2.DbValue < -40)
+        {
+            x += 0.01f;
+
+        }
+
+        if (loud2.DbValue > -40)
+        {
+
+            x -= 0.01f;
+        }
+
+        //  if (loud3.DbValue < 80)
+        //   {
+        //    x+=10;
+
+        //  }
+        // else
+        //  {
+        //      x-= 10;
+        // }
+        //   if (loud4.DbValue < 30)
+        //   {
+        //    x+=0;
+
+        // }
+        //  else
+        //  {
+        //  x-=0;
+        //   }
+       x = Mathf.Clamp(x, min, max);
+        scaleChange = new Vector3(x, x, x);
+        cam.transform.localScale += scaleChange/100;
+        
     }
 }
