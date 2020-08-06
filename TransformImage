@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class transformimage : MonoBehaviour
+{
+    public float x;
+    private GameObject webcam;
+    private Vector3 scaleChange;
+    public sounds loud1;
+    public Transform cam;
+    // Start is called before the first frame update
+    void Start()
+    {
+       
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        x = loud1.DbValue;
+        scaleChange = new Vector3(x, x, x);
+        cam.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);//scaleChange;
+
+    }
+}
