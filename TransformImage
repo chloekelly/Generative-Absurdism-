@@ -14,68 +14,119 @@ public class transformimage : MonoBehaviour
     public Transform cam;
     private float min = 1;
     private float max = 150;
+    private float timer;
+    public float average;
+    public float smooth;
+    private float smoothv;
  
     // Start is called before the first frame update
     void Start()
     {
-       
-        
+        average = -60;
+        smooth = average;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (loud1.DbValue < -40)
-        {
-            scaleChange = new Vector3(10, 10, 10);
-            cam.transform.localScale += scaleChange/1000;
+        timer += Time.deltaTime;
 
+        /* if (loud1.DbValue < -40)
+         {
+             scaleChange = new Vector3(10, 10, 10);
+             cam.transform.localScale += scaleChange/1000;
+
+         }
+
+         if(loud1.DbValue > -40)
+         {
+             scaleChange = new Vector3(-10, -10, -10);
+             cam.transform.localScale += scaleChange/1000;
+         }
+
+
+         if (loud2.DbValue < -40)
+         {
+
+             scaleChange = new Vector3(10, 10, 10);
+             cam.transform.localScale += scaleChange/1000;
+
+
+         }
+
+         if (loud2.DbValue > -40)
+         {
+
+             scaleChange = new Vector3(-10, -10,-10);
+             cam.transform.localScale += scaleChange/1000;
+         }
+
+         if (loud3.DbValue < -40)
+         {
+
+             scaleChange = new Vector3(10, 10, 10);
+             cam.transform.localScale += scaleChange / 1000;
+
+
+         }
+
+         if (loud3.DbValue > -40)
+         {
+
+             scaleChange = new Vector3(-10, -10, -10);
+             cam.transform.localScale += scaleChange / 1000;
+         }
+
+         if (loud4.DbValue < -40)
+         {
+
+             scaleChange = new Vector3(10, 10, 10);
+             cam.transform.localScale += scaleChange / 1000;
+
+
+         }
+
+         if (loud4.DbValue > -40)
+         {
+
+             scaleChange = new Vector3(-10, -10, -10);
+             cam.transform.localScale += scaleChange / 1000;
         }
-       
-        if(loud1.DbValue > -40)
-        {
-            scaleChange = new Vector3(-10, -10, -10);
-            cam.transform.localScale += scaleChange/1000;
-        }
+
+
+
+     */
+
+
+        average = (loud1.DbValue + loud2.DbValue + loud3.DbValue + loud4.DbValue) / 4;
+        smooth = Mathf.SmoothDamp(smooth, average, ref smoothv, 1f);
         
-        
-        if (loud2.DbValue < -40)
+        if( smooth > -60)
         {
-
-            scaleChange = new Vector3(10, 10, 10);
-            cam.transform.localScale += scaleChange/1000;
-
-
+            x = -1;
         }
 
-        if (loud2.DbValue > -40)
+        else
         {
-
-            scaleChange = new Vector3(-10, -10,-10);
-            cam.transform.localScale += scaleChange/1000;
+            x = 1;
         }
 
-        //  if (loud3.DbValue < 80)
-        //   {
-        //    x+=10;
 
-        //  }
-        // else
-        //  {
-        //      x-= 10;
-        // }
-        //   if (loud4.DbValue < 30)
-        //   {
-        //    x+=0;
 
-        // }
-        //  else
-        //  {
-        //  x-=0;
-        //   }
-     //  x = Mathf.Clamp(x, min, max);
-       // scaleChange = new Vector3(x, x, x);
-        //cam.transform.localScale += scaleChange/100;
-        
+        // x = Mathf.Clamp(x, min, max);
+
+        if (cam.transform.localScale.x > 20 && x > 0) {
+            x = 0;
+        }
+
+        if (cam.transform.localScale.x < 12 && x < 0)
+        {
+            x = 0;
+
+        }
+         scaleChange = new Vector3(x, x, 0);
+        cam.transform.localScale += scaleChange/100;
+
     }
 }
+
