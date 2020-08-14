@@ -1,11 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using SpeechLib;
 using System.Xml;
 using System.IO;
 using UnityEngine.UI;
-
-// I took and edited this script from Final Marco for the text to speech function in  my project
 
 /**************************************************************************************
  * ******************Text to Speech for Windows SAPI *********************************
@@ -27,6 +25,12 @@ public class TextToSpeech : MonoBehaviour {
    // public GameObject tts;
     public string dialogue;
     public MonoBehaviour stt;
+
+    public bool noone = false;
+
+
+
+    private float timer;
 
 /// CODE FOR LOAD XML OR OTHER TEXT FILES IN THE SISTEM FROM THE FOLDER RESOURCE
 
@@ -91,10 +95,62 @@ public class TextToSpeech : MonoBehaviour {
     public void Speak()
     {
         voice.Speak(dialogue, SpeechVoiceSpeakFlags.SVSFlagsAsync | SpeechVoiceSpeakFlags.SVSFIsXML);
-        stt.Invoke("StopListening", 0);
-        stt.Invoke("StartListening", 6);
+
+        if (!noone)
+        {
+            stt.Invoke("StopListening", 0);
+            stt.Invoke("StartListening", 3);
+        }
     }
 
+
+	void Update()
+	{
+        timer += Time.deltaTime;
+       // voice.Volume = 100; 
+       voice.Volume = (int)Mathf.Round(70 + 30 * Mathf.Sin(timer/4));
+
+
+
+		if (Input.GetKeyDown("return"))
+		{
+            //int i = Random.Range(0, inputfield.words.Length);
+            voice.Speak(dialogue, SpeechVoiceSpeakFlags.SVSFlagsAsync | SpeechVoiceSpeakFlags.SVSFIsXML);
+            /***************************************************
+			 * Userful resources for Country codes and SAPI XML fomat
+			 * https://msdn.microsoft.com/en-us/library/ms723602(v=vs.85).aspx
+			 * https://msdn.microsoft.com/en-us/library/ms717077(v=vs.85).aspx
+			 * https://msdn.microsoft.com/en-us/library/windows/desktop/dd318693(v=vs.85).aspx
+			 * https://msdn.microsoft.com/en-us/library/jj127898.aspx
+			/**************************************************/
+
+
+            
+			//voice.Rate = 0 ;  //   Rate (no xml)
+
+           // tts.GetComponent<Text>().text += inputfield.words[i];
+            //tts.GetComponent<Text>().text += " ";
+
+
+
+        }
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			voice.Pause();
+			
+		}
+		
+		
+		//TEST PER ANDROID
+		/*	if (Input.GetTouch)
+		{
+
+			voice.Resume();
+		}*/
+		
+		
+	}
+}
 
 	void Update()
 	{
