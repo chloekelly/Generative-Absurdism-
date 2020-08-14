@@ -8,6 +8,7 @@ using UnityEngine.UI;
 /**************************************************************************************
  * ******************Text to Speech for Windows SAPI *********************************
  * ************************************************************************************
+ This work is not soley my own but rather an edited version of Marco Martinellis Text to speech which can be found here: http://www.finalmarco.com/2016/01/02/text-speech-unity-5/
  * v 1.0 - 01/01/2016
  * Marco Martinelli 
  * marco.m@gamesource.it
